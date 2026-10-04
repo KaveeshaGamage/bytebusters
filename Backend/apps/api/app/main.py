@@ -32,14 +32,9 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",
-        "http://localhost:3001",
-        "http://localhost:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:3000",
-        "http://127.0.0.1:3001",
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:5174",
+        origin.strip()
+        for origin in settings.CORS_ORIGINS.split(",")
+        if origin.strip()
     ],
     allow_origin_regex=r"^http:\/\/(localhost|127\.0\.0\.1)(:[0-9]+)?$",
     allow_credentials=True,

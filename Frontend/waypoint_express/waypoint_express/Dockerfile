@@ -3,6 +3,8 @@ FROM ghcr.io/cirruslabs/flutter:stable AS build
 
 WORKDIR /app
 
+ARG API_BASE_URL=http://localhost:8000/api/v1
+
 # Enable Flutter Web
 RUN flutter config --enable-web
 
@@ -12,7 +14,8 @@ RUN flutter pub get
 
 # Copy source tree and compile release web bundle
 COPY . .
-RUN flutter pub get && flutter build web --release --no-wasm-dry-run
+RUN flutter pub get && flutter build web --release --no-wasm-dry-run \
+    --dart-define=BASE_URL=${API_BASE_URL}
 
 # Stage 2: Production Nginx Server
 FROM nginx:alpine

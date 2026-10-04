@@ -19,6 +19,12 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "waypoint_super_secret_jwt_key_change_in_production"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 480
+    CORS_ORIGINS: str = (
+        "http://localhost:3000,http://localhost:3001,"
+        "http://localhost:5173,http://localhost:5174,"
+        "http://127.0.0.1:3000,http://127.0.0.1:3001,"
+        "http://127.0.0.1:5173,http://127.0.0.1:5174"
+    )
     
     # Operational Config Defaults
     DELAY_ALERT_MIN: int = 15
